@@ -9,7 +9,7 @@ using Web_Api.Models;
 
 namespace Web_Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -24,7 +24,7 @@ namespace Web_Api.Controllers
             _jwtConfig = options.Value;
         }
 
-        [HttpPost("Registrar")]
+        [HttpPost("registrar")]
         public async Task<ActionResult> Registrar(RegisterViewModel registerVM)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
@@ -47,7 +47,7 @@ namespace Web_Api.Controllers
             return BadRequest(result.Errors);
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<ActionResult> Login(LoginViewModel LoginVM)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.SelectMany(e => e.Errors));

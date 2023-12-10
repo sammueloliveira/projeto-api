@@ -6,7 +6,7 @@ using Web_Api.Models;
 
 namespace Web_Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/noticia")]
     [ApiController]
     public class NoticiaController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace Web_Api.Controllers
 
         [Authorize]
         [Produces("application/json")]
-        [HttpGet("/api/ListarNoticias")]
+        [HttpGet("listar-noticias")]
         public async Task<List<Noticia>> ListarNoticias()
         {
             return await _INoticiaApp.ListarNoticiasAtivas();
@@ -27,7 +27,7 @@ namespace Web_Api.Controllers
 
         [Authorize]
         [Produces("application/json")]
-        [HttpPost("/api/AdicionarNoticia")]
+        [HttpPost("adicionar-noticia")]
         public async Task<IActionResult> AdicionarNoticia(NoticiaViewModel noticia)
         {
             var noticiaNova = new Noticia
@@ -43,7 +43,7 @@ namespace Web_Api.Controllers
 
         [Authorize]
         [Produces("application/json")]
-        [HttpPut("/api/AtualizarNoticia")]
+        [HttpPut("atualizar-noticia")]
         public async Task<IActionResult> AtualizarNoticia(NoticiaViewModel noticia)
         {
             var noticiaExistente = await _INoticiaApp.GetEntityById(noticia.IdNoticia);
@@ -63,7 +63,7 @@ namespace Web_Api.Controllers
 
         [Authorize]
         [Produces("application/json")]
-        [HttpDelete("/api/ExcluirNoticia")]
+        [HttpDelete("excluir-noticia")]
         public async Task<IActionResult> ExcluirNoticia(int idNoticia)
         {
             var noticiaExistente = await _INoticiaApp.GetEntityById(idNoticia);
@@ -79,7 +79,7 @@ namespace Web_Api.Controllers
 
         [Authorize]
         [Produces("application/json")]
-        [HttpGet("/api/BuscarPorId")]
+        [HttpGet("buscar/{id}")]
         public async Task<IActionResult> BuscarPorId(int idNoticia)
         {
             var noticiaExistente = await _INoticiaApp.GetEntityById(idNoticia);

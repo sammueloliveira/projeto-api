@@ -96,10 +96,6 @@ builder.Services.AddAuthentication(options =>
 
 var app = builder.Build();
 
-var urlCliente1 = "https://dominiocliente.com.br";
-app.UseCors(b => b.WithOrigins(urlCliente1));
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -108,6 +104,15 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minha API v1");
     });
 }
+
+#region [cors]
+app.UseCors(options =>
+{
+    options.WithOrigins("http://localhost:4200")
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
+#endregion
 
 app.UseHttpsRedirection();
 
